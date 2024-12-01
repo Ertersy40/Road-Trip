@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const pickQuestionButton = document.getElementById('pick-question-button');
     const questionCardDiv = document.getElementById('question-card');
     const levelButtons = document.querySelectorAll('.level-button');
+    const levelErrorMessage = document.getElementById('level-error-message');
 
     // Map level numbers to level names
     const levelNames = {
@@ -21,6 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updateQuestionCount();
 
+    let currentQuestionIndex = null; // To keep track of the displayed question
+
     // Handle level button clicks
     levelButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -30,6 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('selected');
             // Update hidden input value
             deepnessLevelInput.value = this.getAttribute('data-level');
+            // Hide error message if visible
+            levelErrorMessage.textContent = '';
         });
     });
 
@@ -37,6 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         const questionText = questionTextInput.value.trim();
         const deepnessLevel = parseInt(deepnessLevelInput.value);
+
+        // Reset error message
+        levelErrorMessage.textContent = '';
 
         if (questionText && deepnessLevel >=1 && deepnessLevel <=5) {
             // Create question object
@@ -56,32 +64,72 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update question count
             updateQuestionCount();
             // Provide feedback to the user
-            alert('Question added successfully!');
+            console.log('Question added successfully!');
             // Scroll to the top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
-            alert('Please enter a valid question and select a deepness level.');
+            if (!deepnessLevel || isNaN(deepnessLevel)) {
+                levelErrorMessage.textContent = 'Please select a deepness level.';
+            }
+            console.log('Please enter a valid question and select a deepness level.');
         }
     });
 
     pickQuestionButton.addEventListener('click', function() {
         if (questions.length === 0) {
-            alert('No questions saved!');
+            console.log('No questions saved!');
             return;
         }
+
+        if (currentQuestionIndex !== null) {
+            // A question is already displayed, remove it
+            removeCurrentQuestion();
+        }
+
+        if (questions.length === 0) {
+            // After removing the current question, there may be no questions left
+            console.log('No more questions left!');
+            questionCardDiv.style.display = 'none';
+            return;
+        }
+
         // Pick a random question
-        const randomIndex = Math.floor(Math.random() * questions.length);
-        const randomQuestion = questions[randomIndex];
+        currentQuestionIndex = Math.floor(Math.random() * questions.length);
+        const randomQuestion = questions[currentQuestionIndex];
 
         // Display the question in the question-card div
-        questionCardDiv.innerHTML = `<h3>${levelNames[randomQuestion.level]}</h3><p>${randomQuestion.text}</p>`;
+        questionCardDiv.innerHTML = `
+            <h3>${levelNames[randomQuestion.level]}</h3>
+            <p>${randomQuestion.text}</p>
+            <button id="done-button" title="Mark as Done">✔️</button>
+        `;
         questionCardDiv.className = '';
         questionCardDiv.classList.add(`level-${randomQuestion.level}`);
         questionCardDiv.style.display = 'block';
 
         // Scroll to the question card
         questionCardDiv.scrollIntoView({ behavior: 'smooth' });
+
+        // Add event listener to the done button
+        document.getElementById('done-button').addEventListener('click', function() {
+            removeCurrentQuestion();
+            questionCardDiv.style.display = 'none';
+        });
     });
+
+    function removeCurrentQuestion() {
+        if (currentQuestionIndex !== null) {
+            // Remove the question from the array
+            questions.splice(currentQuestionIndex, 1);
+            // Update localStorage
+            localStorage.setItem('questions', JSON.stringify(questions));
+            // Reset currentQuestionIndex
+            currentQuestionIndex = null;
+            // Update question count
+            updateQuestionCount();
+            console.log('Question removed from the list.');
+        }
+    }
 
     function updateQuestionCount() {
         questionCountSpan.textContent = questions.length;

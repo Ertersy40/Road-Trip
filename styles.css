@@ -122,6 +122,10 @@ textarea {
     margin-bottom: 20px;
 }
 
+/* Reset and base styles remain the same */
+
+/* ... previous styles ... */
+
 /* Random question card */
 #question-card {
     display: none;
@@ -129,7 +133,39 @@ textarea {
     border-radius: 8px;
     color: #fff;
     margin-top: 20px;
+    position: relative; /* Added for positioning the done button */
 }
+
+/* Done button (tick icon) */
+#done-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+#done-button:hover {
+    color: #000;
+    text-shadow: none;
+}
+
+/* Level-specific styles for question card */
+/* ... previous styles ... */
+
+/* Adjustments for the pick-question-button when a question is displayed */
+#pick-question-button.question-displayed {
+    background-color: #ef5350; /* Change color to indicate delete action */
+}
+
+#pick-question-button.question-displayed::after {
+    content: ' Remove Current Question';
+}
+
 
 #question-card h3 {
     margin-bottom: 15px;
@@ -156,6 +192,14 @@ textarea {
 
 .level-5 {
     background-color: #ef5350; /* Light Red */
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 15px;
 }
 
 /* Responsive adjustments */

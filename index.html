@@ -5,6 +5,8 @@
     <title>Road Trip Question Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobile optimization -->
     <link rel="stylesheet" href="styles.css">
+    <!-- Optional Font Addition -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -28,6 +30,9 @@
                     <button type="button" class="level-button" data-level="4">Deep</button>
                     <button type="button" class="level-button" data-level="5">Soulful</button>
                 </div>
+                <!-- Error message for unselected deepness level -->
+                <p id="level-error-message" class="error-message"></p>
+
                 <input type="hidden" id="deepness-level" name="deepness-level" required>
 
                 <button type="submit" class="primary-button">Add Question</button>
@@ -42,6 +47,7 @@
             <button id="pick-question-button" class="primary-button">Pick a Random Question</button>
             <div id="question-card">
                 <!-- Random question will be displayed here -->
+                <!-- The tick button will be included dynamically via JavaScript -->
             </div>
         </div>
 
