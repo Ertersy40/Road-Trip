@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     pickQuestionButton.addEventListener('click', function() {
         if (questions.length === 0) {
-            console.log('No questions saved!');
+            alert('No questions saved!');
             return;
         }
 
@@ -99,9 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Display the question in the question-card div
         questionCardDiv.innerHTML = `
-            <h3>${levelNames[randomQuestion.level]}</h3>
-            <p>${randomQuestion.text}</p>
-            <button id="done-button" title="Mark as Done">✔️</button>
+            <h3>${randomQuestion.text}</h3>
+            <p>${levelNames[randomQuestion.level]}</p>
         `;
         questionCardDiv.className = '';
         questionCardDiv.classList.add(`level-${randomQuestion.level}`);
