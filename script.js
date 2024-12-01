@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Map level numbers to level names
     const levelNames = {
-        1: 'Icebreaker',
-        2: 'Casual',
-        3: 'Thoughtful',
+        1: 'Would You Rather?',
+        2: 'About Each Other',
+        3: 'Personal',
         4: 'Deep',
-        5: 'Soulful'
+        5: 'Deep as Fuck'
     };
 
     // Load existing questions from localStorage

@@ -15,6 +15,9 @@ body {
 
 /* Container to center content and add padding */
 .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     max-width: 600px;
     margin: 0 auto;
     padding: 20px 15px;
@@ -28,10 +31,17 @@ h1, h2 {
 
 /* Form styling */
 #question-form {
+    
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
+}
+
+#add-question-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .form-group {
@@ -87,8 +97,7 @@ textarea {
 }
 
 .level-button[data-level="3"].selected {
-    background-color: #ffee58; /* Light Yellow */
-    color: #000;
+    background-color: #158215; /* Light Yellow */
 }
 
 .level-button[data-level="4"].selected {
@@ -128,6 +137,7 @@ textarea {
 
 /* Random question card */
 #question-card {
+    width: 100%;
     display: none;
     padding: 20px;
     border-radius: 8px;
@@ -182,7 +192,7 @@ textarea {
 }
 
 .level-3 {
-    background-color: #ffee58; /* Light Yellow */
+    background-color: #158215; /* Light Yellow */
     color: #000;
 }
 
