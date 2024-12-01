@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Road Trip Question Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobile optimization -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Road Trip Question Game</h1>
+
+        <div id="question-form">
+            <h2>Add a Question</h2>
+            <form id="add-question-form">
+                <div class="form-group">
+                    <label for="question-text">Question:</label>
+                    <textarea id="question-text" name="question-text" required></textarea>
+                </div>
+
+                <label>Select Deepness Level:</label>
+                <div id="deepness-levels">
+                    <button type="button" class="level-button" data-level="1">Icebreaker</button>
+                    <button type="button" class="level-button" data-level="2">Casual</button>
+                    <button type="button" class="level-button" data-level="3">Thoughtful</button>
+                    <button type="button" class="level-button" data-level="4">Deep</button>
+                    <button type="button" class="level-button" data-level="5">Soulful</button>
+                </div>
+                <input type="hidden" id="deepness-level" name="deepness-level" required>
+
+                <button type="submit" class="primary-button">Add Question</button>
+            </form>
+        </div>
+
+        <div id="stats">
+            <p>Total Questions Saved: <span id="question-count">0</span></p>
+        </div>
+
+        <div id="random-question">
+            <button id="pick-question-button" class="primary-button">Pick a Random Question</button>
+            <div id="question-card">
+                <!-- Random question will be displayed here -->
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
